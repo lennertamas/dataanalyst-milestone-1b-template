@@ -44,7 +44,6 @@ You are working with a retail company’s **sales database**. Below are the sche
 | order_id     | INT       | Unique ID for each order             |
 | customer_id  | INT       | Foreign key referencing Customers    |
 | order_date   | DATE      | Date when the order was placed       |
-| total_amount | DECIMAL   | Total amount for the order           |
 
 **Table 3: OrderItems**  
 | Column       | Data Type | Description                          |
