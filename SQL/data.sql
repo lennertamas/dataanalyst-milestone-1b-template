@@ -1,6 +1,7 @@
-DROP TABLE IF EXISTS Customers;
-DROP TABLE IF EXISTS Orders;
 DROP TABLE IF EXISTS OrderItems;
+DROP TABLE IF EXISTS Orders;
+DROP TABLE IF EXISTS Customers;
+
 
 -- Create Customers Table
 CREATE TABLE Customers (
