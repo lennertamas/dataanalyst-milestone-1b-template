@@ -1,94 +1,62 @@
+DROP TABLE IF EXISTS Customers;
+DROP TABLE IF EXISTS Orders;
+DROP TABLE IF EXISTS OrderItems;
 
-DROP TABLE IF EXISTS orders;
-DROP TABLE IF EXISTS courier;
-DROP TABLE IF EXISTS pizza;
-DROP TABLE IF EXISTS customer;
-
-
--- 
--- Tábla courier
--- 
-
-CREATE TABLE courier (
-  id SERIAL PRIMARY KEY,
-  "name" VARCHAR(30),
-  phone_number INT
+-- Create Customers Table
+CREATE TABLE Customers (
+    customer_id INT PRIMARY KEY,
+    customer_name VARCHAR(100),
+    join_date DATE,
+    country VARCHAR(50)
 );
 
--- 
--- Tábla adatok: courier
--- 
-
-INSERT INTO courier ("name", phone_number) VALUES ('Hurricane', '123456');
-INSERT INTO courier ("name", phone_number) VALUES ('Villám', '666666');
-INSERT INTO courier ("name", phone_number) VALUES ('Sonic', '258369');
-
-
--- 
--- Tábla szerkezet: pizza
--- 
-
-CREATE TABLE pizza (
-  id SERIAL PRIMARY KEY,
-  "name" VARCHAR(30),
-  price INT
+-- Create Orders Table
+CREATE TABLE Orders (
+    order_id INT PRIMARY KEY,
+    customer_id INT,
+    order_date DATE,
+    total_amount DECIMAL(10, 2),
+    FOREIGN KEY (customer_id) REFERENCES Customers(customer_id)
 );
 
--- 
--- Tábla adatok: pizza
--- 
-
-INSERT INTO pizza ("name", price) VALUES ('Margerita', 1050);
-INSERT INTO pizza ("name", price) VALUES ('Frutti di Mare', 1350);
-INSERT INTO pizza ("name", price) VALUES ('Hawaii', 850);
-
-
-
--- 
--- Tábla szerkezet: orders
--- 
-
-CREATE TABLE orders (
-  id SERIAL PRIMARY KEY,
-  courier_id INT,
-  customer_id INT,
-  pizza_id INT,
-  qty INT
+-- Create OrderItems Table
+CREATE TABLE OrderItems (
+    item_id INT PRIMARY KEY,
+    order_id INT,
+    product_name VARCHAR(100),
+    quantity INT,
+    price DECIMAL(10, 2),
+    FOREIGN KEY (order_id) REFERENCES Orders(order_id)
 );
 
--- 
--- Tábla adatok: order
--- 
+-- Insert Sample Data into Customers Table
+INSERT INTO Customers (customer_id, customer_name, join_date, country) VALUES
+(1, 'Alice Johnson', '2021-01-10', 'USA'),
+(2, 'Bob Smith', '2021-02-15', 'Canada'),
+(3, 'Charlie Lee', '2021-03-05', 'USA'),
+(4, 'Diana Prince', '2021-04-25', 'Canada'),
+(5, 'Eve Davis', '2021-05-30', 'USA');
 
-INSERT INTO orders (courier_id, customer_id, pizza_id, qty) VALUES (3, 2, 2, 3);
-INSERT INTO orders (courier_id, customer_id, pizza_id, qty) VALUES (1, 2, 1, 4);
-INSERT INTO orders (courier_id, customer_id, pizza_id, qty) VALUES (1, 1, 3, 6);
-INSERT INTO orders (courier_id, customer_id, pizza_id, qty) VALUES (2, 1, 1, 2);
-INSERT INTO orders (courier_id, customer_id, pizza_id, qty) VALUES (3, 2, 3, 1);
-INSERT INTO orders (courier_id, customer_id, pizza_id, qty) VALUES (2, 3, 3, 1);
+-- Insert Sample Data into Orders Table
+INSERT INTO Orders (order_id, customer_id, order_date) VALUES
+(101, 1, '2023-01-15'),
+(102, 1, '2023-02-20'),
+(103, 2, '2023-01-18'),
+(104, 2, '2023-02-28'),
+(105, 3, '2023-01-22'),
+(106, 4, '2023-03-01'),
+(107, 5, '2023-03-05'),
+(108, 5, '2023-03-10');
 
-
-
--- 
--- Tábla szerkezet: customer
--- 
-
-CREATE TABLE customer (
-  id SERIAL PRIMARY KEY,
-  "name" VARCHAR(30),
-  address VARCHAR(30)
-);
-  
-
--- 
--- Tábla adatok: customer
--- 
-
-INSERT INTO customer VALUES (1, 'Beni', 'New York');
-INSERT INTO customer VALUES (2, 'Kati', 'London');
-INSERT INTO customer VALUES (3, 'Dani', 'Miskolc');
-
-
-ALTER TABLE orders ADD CONSTRAINT FK_orders_courier FOREIGN KEY (courier_id) REFERENCES courier(id);
-ALTER TABLE orders ADD CONSTRAINT FK_orders_customer FOREIGN KEY (customer_id) REFERENCES customer(id);
-ALTER TABLE orders ADD CONSTRAINT FK_orders_pizza FOREIGN KEY (pizza_id) REFERENCES pizza(id);
+-- Insert Sample Data into OrderItems Table
+INSERT INTO OrderItems (item_id, order_id, product_name, quantity, price) VALUES
+(1001, 101, 'Laptop', 1, 150.00),
+(1002, 102, 'Monitor', 2, 100.00),
+(1003, 103, 'Keyboard', 1, 25.00),
+(1004, 103, 'Mouse', 2, 25.00),
+(1005, 104, 'Headphones', 1, 75.00),
+(1006, 104, 'Speakers', 1, 50.00),
+(1007, 105, 'Smartphone', 2, 150.00),
+(1008, 106, 'Charger', 1, 50.00),
+(1009, 107, 'Tablet', 1, 500.00),
+(1010, 108, 'Smartwatch', 3, 150.00);

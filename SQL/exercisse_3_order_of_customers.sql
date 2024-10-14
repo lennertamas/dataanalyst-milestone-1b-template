@@ -1,7 +1,16 @@
 /*
-The attached database contains data of order handling system of Sunshine Happiness Pizzeria. Pizza table contains details of orderable pizzas, Customer table contains basic data of customers and Couirier contains name of couriers. 
-All of them are connected through the Orders table that contains every order information.
+Question 1: Total Orders Per Customer
 
-Write an sql statement that, based on the total value of the orders, specifies the customers in descending order. For writing the appropriate query use the attached
-entity relationship diagram and basic script that is created for build up the database with test data.
+Write a query to display the total number of orders placed by each customer, 
+along with their name and the date they joined. Sort the results by the total number of orders in descending order.
+*/
+
+
+
+/*
+Question 2: Rank Customers by Spending
+
+For each customer, calculate their total spending (sum of the total amounts from the `Orders` table) 
+and rank them by total spending within their respective country. 
+Use a **window function** to rank the customers.
 */
