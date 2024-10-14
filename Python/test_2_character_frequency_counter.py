@@ -3,7 +3,7 @@
 import unittest
 from excercise_2_character_frequency_counter import get_frequency
 
-# AUTOMATED TEST, DO NOT MODIFIED
+# AUTOMATED TEST, DO NOT MODIFY
 class TestStringMethods(unittest.TestCase):
     def test_basic_test_cases(self):
         self.assertEqual(get_frequency("Géza kék az ég"), {'G': 1, 'é': 3, 'z': 2, 'a': 2, 'k': 2, 'g': 1})

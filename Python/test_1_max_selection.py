@@ -3,7 +3,7 @@
 import unittest
 from excercise_1_max_selection import get_max
 
-# AUTOMATED TEST, DO NOT MODIFIED
+# AUTOMATED TEST, DO NOT MODIFY
 class TestStringMethods(unittest.TestCase):
     def test_basic_test_cases(self):
         self.assertEqual(get_max([1,2,3,4,5,6]), 6)
